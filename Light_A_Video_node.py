@@ -109,7 +109,7 @@ class Light_A_Video_Sampler:
         set_all_seed(42)
 
         local_sam=os.path.join(Light_A_Video_weigths_path,"sam2_b.pt")
-        if os.path.exists(local_sam):
+        if not os.path.exists(local_sam):
             local_sam="sam2_b.pt"
         ref_image_list=tensor2pil_list(images,width,height)
 
