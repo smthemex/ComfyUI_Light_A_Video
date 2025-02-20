@@ -29,7 +29,7 @@ pip install -r requirements.txt
     ├── iclight_sd15_fc.safetensors
     ├── animatediff-motion-adapter-v1-5-3.safetensors  # rename or not 随便换个名字
 ```
-* if use sam2
+* if use [sam2](https://github.com/ultralytics/assets/releases/download/v8.3.0/sam2_b.pt)
 ```
 --   ComfyUI/models/Light_A_Video
     ├── sam2_b.pt  #会自动下载
@@ -41,7 +41,11 @@ pip install -r requirements.txt
 
 
 # 5.Example
-![](https://github.com/smthemex/ComfyUI_Light_A_Video/blob/main/example.png)
+* ic-light
+![](https://github.com/smthemex/ComfyUI_Light_A_Video/blob/main/example_ic.png)
+* inpanit
+![ ](https://github.com/smthemex/ComfyUI_Light_A_Video/blob/main/example_in.png)
+
 
 # Citation
 ```
