@@ -10,6 +10,6 @@ Repository = "https://github.com/smthemex/ComfyUI_Light_A_Video"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = "smthemx"
+PublisherId = "smthemex"
 DisplayName = "ComfyUI_Light_A_Video"
 Icon = ""
