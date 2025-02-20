@@ -1,0 +1,13 @@
+n_prompt: "bad quality, worse quality"
+relight_prompt: "a plane on the runway, bottom neon light"
+video_path: "input_animatediff/plane.mp4"
+bg_source: "BOTTOM"  ## NONE, LEFT, RIGHT, BOTTOM, TOP
+save_path: "output"
+
+width: 512
+height: 512
+strength: 0.5
+gamma: 0.5
+num_step: 25
+text_guide_scale: 2
+seed: 42

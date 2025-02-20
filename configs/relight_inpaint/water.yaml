@@ -1,0 +1,15 @@
+n_prompt: "bad quality, worse quality"
+inpaint_prompt: "a glass of water, in the forest, magic golden lit"
+relight_prompt: "a glass of water, in the forest, magic golden lit, key light"
+
+video_path: "input_animatediff/water.mp4"
+bg_source: "TOP"  ## NONE, LEFT, RIGHT, BOTTOM, TOP
+save_path: "output"
+
+width: 512
+height: 512
+strength: 0.4
+gamma: 0.5
+num_step: 50
+text_guide_scale: 4
+seed: 796
