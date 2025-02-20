@@ -1,0 +1,13 @@
+n_prompt: "bad quality, worse quality, unclear, blurry"
+relight_prompt: "A basket of flowers, sunshine, hard light"
+video_path: "input_animatediff/flowers.mp4"
+bg_source: "LEFT"  ## NONE, LEFT, RIGHT, BOTTOM, TOP
+save_path: "output"
+
+width: 512
+height: 512
+strength: 0.5
+gamma: 0.5
+num_step: 25
+text_guide_scale: 2
+seed: 42

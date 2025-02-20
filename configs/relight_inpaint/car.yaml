@@ -1,0 +1,15 @@
+n_prompt: "bad quality, worse quality"
+inpaint_prompt: "a car driving on the street"
+relight_prompt: "a car driving on the street, neon light"
+
+video_path: "input_animatediff/car.mp4"
+bg_source: "RIGHT"  ## NONE, LEFT, RIGHT, BOTTOM, TOP
+save_path: "output"
+
+width: 512
+height: 512
+strength: 0.5
+gamma: 0.5
+num_step: 50
+text_guide_scale: 2
+seed: 6561

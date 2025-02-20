@@ -1,0 +1,15 @@
+n_prompt: "bad quality, worse quality"
+inpaint_prompt: "a dog in the room, sunshine from window"
+relight_prompt: "a dog in the room, sunshine from window"
+
+video_path: "input_animatediff/dog2.mp4"
+bg_source: "RIGHT"  ## NONE, LEFT, RIGHT, BOTTOM, TOP
+save_path: "output"
+
+width: 512
+height: 512
+strength: 0.4
+gamma: 0.5
+num_step: 50
+text_guide_scale: 2
+seed: 4550
