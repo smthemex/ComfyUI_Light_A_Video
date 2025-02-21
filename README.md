@@ -2,6 +2,9 @@
 [Light-A-Video](https://github.com/bcmi/Light-A-Video): Training-free Video Relighting via Progressive Light Fusion,you can use it in comfyUI
 
 
+# Notice
+* 底模是animatediff，所以只能跑512，需要等官方放出CogVideoX-2B的代码才能跑其他分辨率
+
 # 1. Installation
 
 In the ./ComfyUI /custom_node directory, run the following:   
@@ -14,7 +17,7 @@ git clone https://github.com/smthemex/ComfyUI_Light_A_Video.git
 ```
 pip install -r requirements.txt
 ```
-* if use sam2 in inpaint mode,need 'imageio' and 'ultralytics>=8.3.0'
+* if use sam2  to get mask image (use inpaint mode),need 'ultralytics>=8.3.51',使用sam2模式获取mask图片时（内绘模式），需要'ultralytics>=8.3.51，可能低一两个版本也能用，不测试了。
 
 # 3.Model
 * any sd1.5 checkpoints
@@ -27,17 +30,19 @@ pip install -r requirements.txt
 ```
 --   ComfyUI/models/controlnet
     ├── iclight_sd15_fc.safetensors
-    ├── animatediff-motion-adapter-v1-5-3.safetensors  # rename or not 随便换个名字
+    ├── animatediff-motion-adapter-v1-5-3.safetensors  # rename or not 或者随便换个名字
 ```
-* if use [sam2](https://github.com/ultralytics/assets/releases/download/v8.3.0/sam2_b.pt)
+* if use [sam2](https://github.com/ultralytics/assets/releases/download/v8.3.0/sam2_b.pt) to get mask image，如果使用sam2需要才下载模型，你使用BiRefNet是不用的（当然要下BiRefNet模型），注意sam2的注意点在正中，所以主体最好在中间。
 ```
 --   ComfyUI/models/Light_A_Video
     ├── sam2_b.pt  #会自动下载
 ```  
 
 # 4.Tips
-* The middle prompts is only used for inpaint 中间的prompt是用于内绘模式的；
-* mask_repo：use 'ZhengPeng7/BiRefNet' get mask，or keep it in empty to use sam2 to get mask 获取mask的方法要么填'ZhengPeng7/BiRefNet'，要么不填，会自动用sam2；
+* The prompt in the middle is used for the inner painting mode, and there is no need to fill in the light prompt, but the prompt related to the subject needs to be filled； 
+* 中间的prompt是用于内绘模式的，无需填写灯光提示，需要填写主体相关的prompt；
+* mask_repo：The method to get the mask is either to fill in 'ZhengPeng7/BiRefNet', or not to fill in, and it will automatically use sam2 or use the ‘mask_img’ interface to connect to the mask video；
+* 获取mask的方法要么填'ZhengPeng7/BiRefNet'的repo或者本地绝对地址，要么不填，会自动用sam2模式，或者用mask_img接口连入mask视频；
 
 
 # 5.Example
