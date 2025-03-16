@@ -1,7 +1,7 @@
 import os
 import torch
 import imageio
-import argparse
+#import argparse
 import numpy as np
 import safetensors.torch as sf
 
@@ -181,11 +181,11 @@ def load_ic_light_wan(repo,sd_pipe,sd_repo,ckpt_path,ic_light_model,device,adopt
     ic_light_pipe.vae.requires_grad_(False)
     ic_light_pipe.unet.requires_grad_(False)
 
-    pipeline = {
-        "transformer": pipe.transformer,
-        "text_encoder": pipe.text_encoder,
-        "vae": pipe.vae
-    }
+    # pipeline = {
+    #     "transformer": pipe.transformer,
+    #     "text_encoder": pipe.text_encoder,
+    #     "vae": pipe.vae
+    # }
 
 
     return pipe,ic_light_pipe
