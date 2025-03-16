@@ -33,7 +33,7 @@ class Light_A_Video_Loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "repo": ("STRING", {"default":"F:/test/ComfyUI/models/diffusers/Wan-AI/Wan2.1-T2V-1.3B-Diffusers"},),
+                "repo": ("STRING", {"default":"Wan-AI/Wan2.1-T2V-1.3B-Diffusers"},),
                 "model": (folder_paths.get_filename_list("checkpoints"),),
                 "motion_adapter_model": (["none"] + folder_paths.get_filename_list("controlnet"),),
                 "ic_light_model": (["none"] + folder_paths.get_filename_list("controlnet"),),
