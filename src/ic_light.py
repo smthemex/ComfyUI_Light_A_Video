@@ -51,10 +51,16 @@ class Relighter:
         
         conds, unconds = self.encode_prompt_pair(tokenizer, device, positive_prompt, negative_prompt)
         input_bg = self.create_background()
-        bg = resize_and_center_crop(input_bg, self.image_width, self.image_height)
-        bg_latent = numpy2pytorch([bg], device, vae.dtype)
-        bg_latent = vae.encode(bg_latent).latent_dist.mode() * vae.config.scaling_factor
-        
+        # bg = resize_and_center_crop(input_bg, self.image_width, self.image_height)
+        # bg_latent = numpy2pytorch([bg], device, vae.dtype)
+        # bg_latent = vae.encode(bg_latent).latent_dist.mode() * vae.config.scaling_factor
+        if self.bg_source == BGSource.NONE:
+             shape = (1, 4, self.image_width//8, self.image_height//8)
+             bg_latent = torch.randn(shape, generator=generator, device=device, dtype=vae.dtype)
+        else:
+             bg = resize_and_center_crop(input_bg, self.image_width, self.image_height)
+             bg_latent = numpy2pytorch([bg], device, vae.dtype)
+             bg_latent = vae.encode(bg_latent).latent_dist.mode() * vae.config.scaling_factor
         self.bg_latent = bg_latent.repeat(self.num_frames, 1, 1, 1) ## 固定光源
         self.conds = conds.repeat(self.num_frames, 1, 1)
         self.unconds = unconds.repeat(self.num_frames, 1, 1)

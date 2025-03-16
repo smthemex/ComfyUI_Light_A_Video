@@ -1,0 +1,14 @@
+n_prompt: "bad quality, worse quality"
+vdm_prompt: "a bear walking on the rock"
+relight_prompt: "a bear walking on the rock, nature lighting, soft light"
+video_path: "input_cog/bear.mp4"
+bg_source: "TOP"  ## LEFT, RIGHT, BOTTOM, TOP
+save_path: "output"
+
+width: 720
+height: 480
+strength: 0.4
+gamma: 0.7
+num_step: 25
+text_guide_scale: 2
+seed: 42
