@@ -5,7 +5,7 @@
 # Update
 * support ‘cogvideox’ and ‘wan2.1 diffusers’  视频底模同步官方代码,支持cogvideox 和 ‘万相2.1 diffusers’
 * wan2.1 image size  set to 832 * 480, cogvideox image size  set to 720 * 480 万相的图片尺寸设置832 * 480，cog设置720 * 480
-* wan2.1 or cogvideoX need 4090 or more Vram，目前还没有优化，主要是wan的T5太大了
+* wan2.1  need 4090 or more Vram，目前还没有优化，主要是wan的T5太大了
 
 # 1. Installation
 
