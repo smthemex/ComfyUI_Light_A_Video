@@ -38,14 +38,14 @@ from diffusers.pipelines.free_init_utils import FreeInitMixin
 from diffusers.pipelines.free_noise_utils import AnimateDiffFreeNoiseMixin
 from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
 from diffusers.pipelines.animatediff.pipeline_output import AnimateDiffPipelineOutput
-
+from packaging import version
 from .ic_light import Relighter
 from einops import rearrange
 from diffusers.utils import export_to_gif
 from .animatediff_eul import eul_step
 import math
 from .tools import vis_video
-
+import diffusers
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 
 EXAMPLE_DOC_STRING = """
@@ -977,6 +977,9 @@ class AnimateDiffVideoToVideoPipeline(
             else None
         )
 
+
+        required_version = "0.32.1"
+
         num_free_init_iters = self._free_init_num_iters if self.free_init_enabled else 1
         for free_init_iter in range(num_free_init_iters):
             if self.free_init_enabled:
@@ -989,7 +992,8 @@ class AnimateDiffVideoToVideoPipeline(
 
             self._num_timesteps = len(timesteps)
             num_warmup_steps = len(timesteps) - num_inference_steps * self.scheduler.order
-
+            batch_size_ = 2  # 低版本的diffusers仅支持2个批次输入
+            j=0
             # 8. Denoising loop
             with self.progress_bar(total=self._num_timesteps) as progress_bar:
                 for i, t in enumerate(timesteps):
@@ -997,11 +1001,24 @@ class AnimateDiffVideoToVideoPipeline(
                     latent_model_input = torch.cat([latents] * 2) if self.do_classifier_free_guidance else latents
                     latent_model_input = self.scheduler.scale_model_input(latent_model_input, t)
 
+                    if version.parse(diffusers.__version__) < version.parse(required_version):
+                        start_idx = (j * batch_size_)
+                        end_idx = start_idx + batch_size_
+                        if end_idx > prompt_embeds.shape[0]:
+                            # 如果end_idx超出边界，从头开始截取
+                            prompt_embeds_batch = prompt_embeds[start_idx:]
+                            j = 0  
+                        else:
+                            prompt_embeds_batch = prompt_embeds[start_idx:end_idx]
+                            j += 1
+                    else:
+                        prompt_embeds_batch = prompt_embeds
+                        
                     # predict the noise residual
                     noise_pred = self.unet( 
                         latent_model_input,
                         t,
-                        encoder_hidden_states=prompt_embeds,
+                        encoder_hidden_states=prompt_embeds_batch,
                         cross_attention_kwargs=self.cross_attention_kwargs,
                         added_cond_kwargs=added_cond_kwargs,
                     ).sample
