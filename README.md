@@ -61,7 +61,7 @@ pip install -e ".[torch]"
 * fill repo [THUDM/CogVideoX-2b](https://huggingface.co/THUDM/CogVideoX-2b/tree/main)  or local repo (使用抱脸的repo在线下载或者预下载存放在本地的本地repo地址)
 
 # 4.Tips
-* 第三条为cog和wan专用prompt，只需要填写主体，比如一只熊什么的，不要填写灯光（The third is a special prompt for cog and wan, only need to fill in the main body, such as a bear or something, do not fill in the light）;  
+* 第二条为cog和wan专用prompt，只需要填写主体，比如一只熊什么的，不要填写灯光（The second is a special prompt for cog and wan, only need to fill in the main body, such as a bear or something, do not fill in the light）;  
 * The prompt in the middle is used for the inner painting mode, and there is no need to fill in the light prompt, but the prompt related to the subject needs to be filled； 
 * 中间的prompt是用于内绘模式的，无需填写灯光提示，需要填写主体相关的prompt；
 * mask_repo：The method to get the mask is either to fill in 'ZhengPeng7/BiRefNet', or not to fill in, and it will automatically use sam2 or use the ‘mask_img’ interface to connect to the mask video；
