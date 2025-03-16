@@ -175,7 +175,11 @@ def load_ic_light_cog(repo,sd_pipe,sd_repo,ckpt_path,ic_light_model,device,adopt
     ic_light_pipe = ic_light_pipe.to(device=device, dtype=adopted_dtype)
     ic_light_pipe.vae.requires_grad_(False)
     ic_light_pipe.unet.requires_grad_(False)
-
+    
+    pipe.enable_sequential_cpu_offload()
+    pipe.vae.enable_slicing()
+    pipe.vae.enable_tiling()
+    
     return pipe,ic_light_pipe
 
 def infer_relight_cog(ic_light_pipe,pipe,strength,num_step,text_guide_scale,seed,image_width,image_height,n_prompt,relight_prompt,vdm_prompt,video_list,bg_source,num_frames,mode,mask_list,device,adopted_dtype,repo,fps,local_sam):
