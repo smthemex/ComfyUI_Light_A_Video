@@ -1,7 +1,7 @@
 from PIL import Image,ImageSequence
 import numpy as np
 import torch
-from moviepy.editor import VideoFileClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
 import os
 import imageio
 import random
