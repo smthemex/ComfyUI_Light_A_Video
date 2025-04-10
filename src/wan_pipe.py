@@ -626,7 +626,7 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
         if latents is None:
             video = self.video_processor.preprocess_video(video, height=height, width=width)
             video = video.to(device=device, dtype=prompt_embeds.dtype)
-            
+        org_target = video    
         # 5. Prepare latent variables
         num_channels_latents = self.transformer.config.in_channels
         
@@ -699,6 +699,11 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
                     sigma = self.scheduler.sigmas[self.scheduler.step_index]
                     pred_x0_latent = latents - sigma * noise_pred 
                     consist_target = self.decode_latents(pred_x0_latent) 
+                    
+                    ## detail compensation
+                    if i == 0:
+                        detail_diff = org_target - consist_target
+                    consist_target = consist_target + lbd * detail_diff
                     
                     consist_target = rearrange(consist_target, "1 c f h w -> f c h w")
                     relight_target = relighter(consist_target) 
