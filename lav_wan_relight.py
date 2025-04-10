@@ -16,7 +16,7 @@ from diffusers.models.attention_processor import AttnProcessor2_0
 from .src.ic_light_pipe import StableDiffusionImg2ImgPipeline
 from .src.wan_pipe import WanVideoToVideoPipeline
 from .src.ic_light import BGSource
-from .utils.tools import set_all_seed, read_video
+from diffusers import FlowMatchEulerDiscreteScheduler
 
 
 def load_ic_light_wan(repo,sd_pipe,sd_repo,ckpt_path,ic_light_model,device,adopted_dtype):
@@ -28,6 +28,9 @@ def load_ic_light_wan(repo,sd_pipe,sd_repo,ckpt_path,ic_light_model,device,adopt
     from diffusers import AutoencoderKLWan
     vae = AutoencoderKLWan.from_pretrained(repo, subfolder="vae", torch_dtype=adopted_dtype)
     pipe = WanVideoToVideoPipeline.from_pretrained(repo, vae=vae, torch_dtype=adopted_dtype)
+    
+    FlowMatching_scheduler = FlowMatchEulerDiscreteScheduler(shift=3.0)
+    pipe.scheduler = FlowMatching_scheduler
 
     pipe = pipe.to(device=device, dtype=adopted_dtype)
     pipe.vae.requires_grad_(False)
